@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.meizitu.hjs.myhjs.MainActivity">
+    <item
+        android:id="@+id/action_lofter"
+        android:orderInCategory="100"
+        android:title="网易Lofter" />
+    <item
+        android:id="@+id/action_mzitu"
+        android:orderInCategory="100"
+        android:title="妹子图1" />
+    <item
+        android:id="@+id/action_meizitu"
+        android:orderInCategory="100"
+        android:title="妹子图2" />
+</menu>
