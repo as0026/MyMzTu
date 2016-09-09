@@ -153,7 +153,7 @@ public class MztuDao {
                     .header("User-Agent",
                             "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0")
                     .timeout(10000).get();
-            Elements temps = doc.select("a.page-numbers a[href]");
+            Elements temps = doc.select("a.page-numbers");
             if (temps != null) {
                 for (Element ele : temps) {
                     String url = ele.attr("href");
