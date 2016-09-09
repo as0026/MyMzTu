@@ -60,7 +60,7 @@ public class MztuDao {
      * 从妹子图网站上获取数据
      */
     public List<MzituBean> getMeiZiTuDatas(int pageNumber) {
-        XLog.v(MztuDao.TAG,"正在妹子图服务器数据列表...");
+        XLog.v(MztuDao.TAG,"正在妹子图(meizitu)服务器数据列表...");
         String baseUrl = AppUrl.meizitu_baseUrl;
         Document doc = null;
         int number = 0;
@@ -143,7 +143,7 @@ public class MztuDao {
      * 从妹子图网站中获取数据
      */
     public List<MzituBean> getMzituDatas(int pageNumber) {
-        XLog.v(MztuDao.TAG,"正在从妹子图服务器服务器数据列表...");
+        XLog.v(MztuDao.TAG,"正在从妹子图(mzitu)服务器服务器数据列表...");
         String baseUrl = AppUrl.mzitu_baseUrl;
         Document doc = null;
         int number = 0;
