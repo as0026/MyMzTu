@@ -29,7 +29,7 @@ public class MztuDao {
      */
     public List<MzituBean> getLofterDatas(String tag){
         XLog.v(MztuDao.TAG,"正在从网易Lofter服务器获取数据列表...");
-        String baseUrl = AppUrl.lofter_baseUrl+(tag == null || tag.trim().length() <= 0 ? "美女":tag);
+        String baseUrl = AppUrl.lofter_baseUrl+(tag == null || tag.trim().length() <= 0 ? "胸":tag);
         List<MzituBean> imgsList = null;
         try {
             Document doc = Jsoup.connect(baseUrl).header("User-Agent",
