@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.android.volley.toolbox.NetworkImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.hjs.mymztu.R;
 import com.hjs.mymztu.entity.MzituBean;
 import com.hjs.mymztu.utils.VolleyHelper;
@@ -53,6 +55,7 @@ public class MainRecyclerAdapter extends RecyclerView.Adapter<MainRecyclerAdapte
     @Override
     public void onBindViewHolder(final MainHoder holder, int position) {
         holder.itemTxt.setText(mData.get(position).getTitle());
+//        GlideUrl glideUrl = new GlideUrl(mData.get(position).getFirstImgUrl(),new LazyHeaders.Builder().setHeader("Referer","http://www.mzitu.com/").build());
         Glide.with(mContext).load(mData.get(position).getFirstImgUrl()).crossFade(500).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.mipmap.ic_launcher).error(R.mipmap.ic_launcher).fitCenter().into(holder.itemCoverImg);
         // 如果设置了回调，则设置点击事件
         if (mOnItemClickLitener != null){

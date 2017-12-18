@@ -29,21 +29,20 @@ public class MztuDao {
      */
     public List<MzituBean> getLofterDatas(String tag){
         XLog.v(MztuDao.TAG,"正在从网易Lofter服务器获取数据列表...");
-        String baseUrl = AppUrl.lofter_baseUrl+(tag == null || tag.trim().length() <= 0 ? "胸":tag);
+        String baseUrl = AppUrl.lofter_baseUrl+(tag == null || tag.trim().length() <= 0 ? "胸":tag+"?tab=archive");
         List<MzituBean> imgsList = null;
         try {
             Document doc = Jsoup.connect(baseUrl).header("User-Agent",
                     "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1").timeout(20000).get();
-            Elements temps = doc.select("div.f-cb img");
+            Elements temps = doc.select("ul.f-cb img");
             if (temps != null) {
                 imgsList = new ArrayList<MzituBean>();
                 for(Element ele : temps){
                     MzituBean bean = new MzituBean();
-                    String firstImgUrl = ele.attr("src");
-                    bean.setFirstImgUrl(firstImgUrl);
-                    System.out.println("--"+firstImgUrl);
-                    String[] urls = {firstImgUrl.substring(firstImgUrl.indexOf("imgurl=")+7,firstImgUrl.indexOf("?imageView")==-1?firstImgUrl.length():firstImgUrl.indexOf("?imageView"))};
-                    System.out.println("--urls="+urls[0]);
+                    String tempImgUrl = ele.attr("src");
+                    tempImgUrl = tempImgUrl.substring(tempImgUrl.indexOf("imgurl=")+7,tempImgUrl.indexOf("?imageView")==-1?tempImgUrl.length():tempImgUrl.indexOf("?imageView"));
+                    bean.setFirstImgUrl(tempImgUrl);
+                    String[] urls = {tempImgUrl};
                     bean.setUrls(urls);
                     imgsList.add(bean);
                 }
@@ -65,7 +64,7 @@ public class MztuDao {
         Document doc = null;
         int number = 0;
         try {
-            doc = Jsoup.connect(baseUrl + "list_1_1.html").timeout(10000).get();
+            doc = Jsoup.connect(baseUrl + "more_1.html").timeout(10000).get();
             Elements temps = doc.select("div#wp_page_numbers li a[href]");
             if (temps != null) {
                 String content = temps.last().attr("href");
@@ -94,7 +93,7 @@ public class MztuDao {
         try {
             doc = Jsoup
                     .connect(
-                            String.format(baseUrl + "list_1_%d.html",
+                            String.format(baseUrl + "more_%d.html",
                                     currentIndex)).timeout(10000).get();
         } catch (IOException e) {
             e.printStackTrace();
@@ -149,7 +148,7 @@ public class MztuDao {
         int number = 0;
         try {
             doc = Jsoup
-                    .connect(baseUrl + "page/1")
+                    .connect(baseUrl + "page/1/")
                     .header("User-Agent",
                             "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0")
                     .timeout(10000).get();
@@ -184,7 +183,7 @@ public class MztuDao {
         XLog.v(MztuDao.TAG,"正在连接服务器...");
         try {
             doc = Jsoup
-                    .connect(String.format(baseUrl + "page/%d", currentIndex))
+                    .connect(String.format(baseUrl + "page/%d/", currentIndex))
                     .header("User-Agent",
                             "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:33.0) Gecko/20100101 Firefox/33.0")
                     .timeout(10000).get();
